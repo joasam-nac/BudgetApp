@@ -1,3 +1,5 @@
+package Tidigare_gjort;
+
 public class IdHandler {
     private static int counter = 0;
 

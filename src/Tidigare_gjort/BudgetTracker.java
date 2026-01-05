@@ -1,3 +1,5 @@
+package Tidigare_gjort;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ public class BudgetTracker implements Observer{
     double ratio; // (0,1]
     List<Category> categories;
 
+    // inte klar!
     void setTotalBudget() {
         this.spent = 0.0;
         this.categories = new ArrayList<>();
