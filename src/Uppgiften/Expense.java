@@ -1,3 +1,5 @@
+package Uppgiften;
+
 public class Expense implements Transaction {
     public String name;
     public double value;
@@ -16,6 +18,6 @@ public class Expense implements Transaction {
         return value;
     }
     public String getCategory() {
-        return category.getName();
+        return category.name();
     }
 }
