@@ -1,5 +1,6 @@
 package Uppgiften;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //MHA observer kunna sätta budget per kategori
@@ -21,19 +22,19 @@ public class Menu {
 
             UserChoices uc = UserChoices.fromInput(sc.nextLine());
 
+            IO.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
             switch(uc){
                 case CHANGE_BUDGET:
                     System.out.print("Set new max budget:");
-                    double maxBudget = sc.nextDouble();
-                    sc.nextLine();
+                    double maxBudget = awaitDouble(sc);
                     budget.setMaxBudget(maxBudget);
                     break;
                 case ADD_EXPENSE:
                     System.out.print("Write name of expense:");
                     String expenseName = sc.nextLine();
                     System.out.print("Write Expense amount: ");
-                    double expenseAmount = sc.nextDouble();
-                    sc.nextLine();
+                    double expenseAmount = awaitDouble(sc);
                     System.out.println("List of categories:");
 
                     int i = 0;
@@ -45,8 +46,7 @@ public class Menu {
 
                     System.out.println("Choose an option (number): ");
 
-                    int categoryChoice = sc.nextInt();
-
+                    int categoryChoice = awaitInt(sc);
                     sc.nextLine();
 
                     if(categoryChoice == i){
@@ -79,6 +79,38 @@ public class Menu {
             }
             return true;
 
+    }
+
+    public double awaitDouble(Scanner sc){
+
+        double input;
+
+        while(true){
+            try{
+            input = sc.nextDouble();
+            break;
+            }catch (InputMismatchException ex) {
+                IO.println("Invalid input, try again!");
+            }
+            sc.nextLine();
+        }
+        return input;
+    }
+
+    public int awaitInt(Scanner sc){
+
+        int input;
+
+        while(true){
+            try{
+                input = sc.nextInt();
+                break;
+            }catch (InputMismatchException ex) {
+                IO.println("Invalid input, try again!");
+            }
+            sc.nextLine();
+        }
+        return input;
     }
 
 

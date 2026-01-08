@@ -44,6 +44,7 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
                 scanner.nextLine();
                 expenseToEdit.value = newValue;
                 System.out.println("Amount updated: " + expenseToEdit.name);
+                budget.observers.getFirst().onBudgetEdited();
                 break;
             case 3:
                 System.out.println("Enter new category: ");
@@ -63,6 +64,7 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
                 String name = budget.expenses.get(selection - 1).getName();
                 budget.expenses.remove(selection - 1);
                 System.out.println("Deleted expense: " + name);
+                budget.observers.getFirst().onBudgetEdited();
                 break;
             default:
                 System.out.println("Invalid option");
