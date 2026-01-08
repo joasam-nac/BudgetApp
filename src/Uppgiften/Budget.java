@@ -6,12 +6,12 @@ import java.util.List;
 public class Budget {
     public double maxBudget = 1000.0;
     public List<Expense> expenses;
-    public ObserverTest observer;
+    public List<BudgetObserver> observers;
 
     public Budget(double maxBudget) {
         this.maxBudget = maxBudget;
         this.expenses = new ArrayList<Expense>();
-        this.observer = new ObserverTest(maxBudget, 0, 0.75);
+        observers.add(new ObserverTest(maxBudget, 0.75));
     }
 
     public Budget() {
@@ -20,7 +20,7 @@ public class Budget {
 
     public void addExpense(Expense e){
         this.expenses.add(e);
-        observer.ping(e.getValue());
+        observers.getFirst().onExpenseAdded(e);
     }
 
     public double getMaxBudget() {
