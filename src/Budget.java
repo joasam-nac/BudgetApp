@@ -24,4 +24,6 @@ public class Budget {
         System.out.println("Total: " + sum);
         System.out.println((sum*100.0)/maxBudget + "% av budgeten spenderad");
     }
+
+
 }
