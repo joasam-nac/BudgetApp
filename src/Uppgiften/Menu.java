@@ -2,6 +2,10 @@ package Uppgiften;
 
 import java.util.Scanner;
 
+// Att göra: Kunna redigera transaktion.
+//MHA observer kunna sätta budget per kategori
+//varna när användare är nära budget-tak
+
 public class Menu {
 
     public static Budget budget = new Budget(1000.0);
@@ -61,12 +65,12 @@ public class Menu {
                 case EXIT:
                     System.out.println("Exiting...");
                     return false;
-                    break;
                 case null:
                     System.out.println("Invalid input :(");
                     break;
 
             }
+            return true;
 
     }
 
