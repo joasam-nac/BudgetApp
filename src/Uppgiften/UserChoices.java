@@ -3,8 +3,9 @@ package Uppgiften;
 public enum UserChoices {
     CHANGE_BUDGET("1", "Change budget"),
     ADD_EXPENSE("2", "Add expense"),
-    CHECK_OVERVIEW("3", "Check overview"),
-    EXIT("4", "Exit");
+    EDIT_EXPENSE("3", "Edit expense"),
+    CHECK_OVERVIEW("4", "Check overview"),
+    EXIT("5", "Exit");
 
     private final String key;
     private final String description;
