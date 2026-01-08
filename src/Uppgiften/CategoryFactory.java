@@ -4,7 +4,7 @@ import java.util.*;
 
 public final class CategoryFactory {
 
-    public final Set<String> defaultNames = Set.of("Food", "Clothes");
+    public final Set<String> defaultNames = Set.of("Food", "Clothes", "Hobbies", "Transportation", "Utilities", "Health", "LifeStyle");
 
     public final List<Category> categories = new ArrayList<>();
 

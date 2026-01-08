@@ -2,7 +2,6 @@ package Uppgiften;
 
 import java.util.Scanner;
 
-// Att göra: Kunna redigera transaktion.
 //MHA observer kunna sätta budget per kategori
 //varna när användare är nära budget-tak
 
@@ -59,9 +58,17 @@ public class Menu {
                     }
                     budget.addExpense(new Expense(expenseName, expenseAmount, cf.getCategoryFromOrder(categoryChoice)));
                     break;
+
+                case EDIT_EXPENSE:
+                    System.out.println("Edit expense");
+                    TransactionEditor te = new TransactionEditor(budget, cf);
+                    te.editTransaction(sc);
+                    break;
+
                 case CHECK_OVERVIEW:
                     budget.print();
                     break;
+
                 case EXIT:
                     System.out.println("Exiting...");
                     return false;
