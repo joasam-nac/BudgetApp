@@ -1,3 +1,5 @@
+package Uppgiften;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,25 +7,36 @@ public class Budget {
     public double maxBudget = 1000.0;
     public List<Expense> expenses;
 
-    Budget(double maxBudget) {
+    public Budget(double maxBudget) {
         this.maxBudget = maxBudget;
         this.expenses = new ArrayList<Expense>();
+    }
+
+    public Budget() {
+        this.expenses = new ArrayList<>();
     }
 
     public void addExpense(Expense e){
         this.expenses.add(e);
     }
 
+    public double getMaxBudget() {
+        return maxBudget;
+    }
+
+    public void setMaxBudget(double maxBudget) {
+        this.maxBudget = maxBudget;
+    }
+
     public void print() {
-        System.out.println("Översikt:");
+        System.out.println("Overview:");
+        System.out.println("Your max budget is: " + maxBudget);
         double sum = 0.0;
         for(Expense e: this.expenses){
             System.out.println(e.getName() + ", " + e.getCategory() + ": " + e.getValue());
             sum += e.getValue();
         }
-        System.out.println("Total: " + sum);
-        System.out.println((sum*100.0)/maxBudget + "% av budgeten spenderad");
+        System.out.println("Spent: " + sum);
+        System.out.println((sum*100.0)/maxBudget + "% of the budget spent");
     }
-
-
 }
