@@ -58,6 +58,13 @@ public class Menu {
                     }
                     budget.addExpense(new Expense(expenseName, expenseAmount, cf.getCategoryFromOrder(categoryChoice)));
                     break;
+
+                case EDIT_EXPENSE:
+                    System.out.println("Edit expense");
+                    TransactionEditor te = new TransactionEditor(budget, cf);
+                    te.editTransaction(sc);
+                    break;
+
                 case CHECK_OVERVIEW:
                     budget.print();
                     break;
