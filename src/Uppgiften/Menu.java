@@ -27,14 +27,14 @@ public class Menu {
             switch(uc){
                 case CHANGE_BUDGET:
                     System.out.print("Set new max budget:");
-                    double maxBudget = awaitDouble(sc);
+                    double maxBudget = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
                     budget.setMaxBudget(maxBudget);
                     break;
                 case ADD_EXPENSE:
                     System.out.print("Write name of expense:");
                     String expenseName = sc.nextLine();
                     System.out.print("Write Expense amount: ");
-                    double expenseAmount = awaitDouble(sc);
+                    double expenseAmount = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE,true);
                     System.out.println("List of categories:");
 
                     int i = 0;
@@ -46,8 +46,7 @@ public class Menu {
 
                     System.out.println("Choose an option (number): ");
 
-                    int categoryChoice = awaitInt(sc);
-                    sc.nextLine();
+                    int categoryChoice = (Integer) CorrectInputControl.check(sc,InputType.FOR_A_INT,true);
 
                     if(categoryChoice == i){
                         System.out.println("New category selected");
@@ -80,7 +79,7 @@ public class Menu {
             return true;
 
     }
-
+/*
     public double awaitDouble(Scanner sc){
 
         double input;
@@ -112,6 +111,6 @@ public class Menu {
         }
         return input;
     }
-
+*/
 
 }

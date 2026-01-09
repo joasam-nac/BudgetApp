@@ -18,8 +18,7 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
 
 
         System.out.println("Select expense you want to change ");
-        int selection = scanner.nextInt();
-        scanner.nextLine();
+        int selection = (Integer) CorrectInputControl.check(scanner,InputType.FOR_A_INT, true);
 
         Expense expenseToEdit = budget.expenses.get(selection - 1);
 
@@ -29,8 +28,7 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
         System.out.println("3. Change category");
         System.out.println("4. Delete expense");
 
-        int option = scanner.nextInt();
-        scanner.nextLine();
+        int option = (Integer) CorrectInputControl.check(scanner,InputType.FOR_A_INT, true);
 
         switch (option) {
             case 1:
@@ -40,8 +38,7 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
                 break;
             case 2:
                 System.out.println("Enter new value: ");
-                double newValue = scanner.nextDouble();
-                scanner.nextLine();
+                double newValue = (Double) CorrectInputControl.check(scanner,InputType.FOR_A_DOUBLE, true);
                 expenseToEdit.value = newValue;
                 System.out.println("Amount updated: " + expenseToEdit.name);
                 budget.observers.getFirst().onBudgetEdited();
@@ -55,8 +52,7 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
                 }
 
                 System.out.print("Choose category: ");
-                int categoryChoice = scanner.nextInt();
-                scanner.nextLine();
+                int categoryChoice = (Integer) CorrectInputControl.check(scanner,InputType.FOR_A_INT, true);
                 expenseToEdit.category = categoryFactory.getCategoryFromOrder(categoryChoice);
                 System.out.println(expenseToEdit.name + " successfully edited");
                 break;
