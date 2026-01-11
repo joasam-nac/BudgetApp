@@ -10,13 +10,13 @@ public final class CategoryFactory {
 
     public CategoryFactory() {
         for (String s: defaultNames) {
-            categories.add(new Category(s));
+            categories.add(new Category(s, new CategoryObserver(s)));
         }
     }
 
     public Category getCategory(String name) {
         for (Category c: categories) {
-            if (Objects.equals(c.name(), name)){
+            if (Objects.equals(c.getName(), name)){
                 return c;
             }
         }
@@ -27,13 +27,13 @@ public final class CategoryFactory {
         return categories;
     }
 
-    public void createCategory(Category category) {
+    public void createCategory(String category) {
         for (Category c: categories) {
-            if (Objects.equals(c, category)){
+            if (c.getName().equals(category)){
                 return;
             }
         }
-        categories.add(category);
+        categories.add(new Category(category, new CategoryObserver(category)));
     }
 
     public Category getCategoryFromOrder(int order) {

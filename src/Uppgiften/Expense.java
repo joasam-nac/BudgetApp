@@ -17,7 +17,7 @@ public class Expense implements Transaction {
     public double getValue() {
         return value;
     }
-    public String getCategory() {
-        return category.name();
+    public Category getCategory() {
+        return category;
     }
 }

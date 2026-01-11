@@ -11,16 +11,14 @@ public class Budget {
     public Budget(double maxBudget) {
         this.maxBudget = maxBudget;
         this.expenses = new ArrayList<Expense>();
-        observers.add(new ObserverTest(this));
-    }
-
-    public Budget() {
-        this.expenses = new ArrayList<>();
+        observers.add(new ObserverTest());
     }
 
     public void addExpense(Expense e){
         this.expenses.add(e);
-        observers.getFirst().onBudgetEdited();
+        e.getCategory().observer.maxBudgetCheck(this, e.getCategory());
+        observers.getFirst().maxBudgetCheck(this, e.getCategory());
+
     }
 
     public double getMaxBudget() {
@@ -36,7 +34,7 @@ public class Budget {
         System.out.println("Your max budget is: " + maxBudget);
         double sum = 0.0;
         for(Expense e: this.expenses){
-            System.out.println(e.getName() + ", " + e.getCategory() + ": " + e.getValue());
+            System.out.println(e.getName() + ", " + e.getCategory().getName() + ": " + e.getValue());
             sum += e.getValue();
         }
         System.out.println("Spent: " + sum);

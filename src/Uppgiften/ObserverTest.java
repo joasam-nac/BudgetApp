@@ -1,15 +1,12 @@
 package Uppgiften;
 
-public class ObserverTest implements BudgetObserver {
 
-    private final Budget budget;
-    private double spent;
-    public ObserverTest(Budget budget) {
-        this.budget = budget;
-    }
+public class ObserverTest implements BudgetObserver{
 
-    public void onBudgetEdited(){
+    public ObserverTest() {}
 
+    public void maxBudgetCheck(Budget budget, Category category){
+        double spent = 0;
         double ratio = 0.85 * budget.getMaxBudget();
 
         for( Expense expense : budget.expenses){
@@ -23,6 +20,5 @@ public class ObserverTest implements BudgetObserver {
         } else if (spent > budget.getMaxBudget()) {
             IO.println("HOLY SHIT YOU ARE YOU CRAZY???");
         }
-        spent = 0;
     }
 }

@@ -41,14 +41,15 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
                 double newValue = (Double) CorrectInputControl.check(scanner,InputType.FOR_A_DOUBLE, true);
                 expenseToEdit.value = newValue;
                 System.out.println("Amount updated: " + expenseToEdit.name);
-                budget.observers.getFirst().onBudgetEdited();
+                expenseToEdit.category.observer.maxBudgetCheck(budget, expenseToEdit.getCategory());
+                budget.observers.getFirst().maxBudgetCheck(budget, expenseToEdit.getCategory());
                 break;
             case 3:
                 System.out.println("Enter new category: ");
                 int i = 0;
                 for (Category c : categoryFactory.getAllCategories()) {
                     i++;
-                    System.out.println(i + ". " + c.name());
+                    System.out.println(i + ". " + c.getName());
                 }
 
                 System.out.print("Choose category: ");
@@ -58,9 +59,11 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
                 break;
             case 4:
                 String name = budget.expenses.get(selection - 1).getName();
+                Category categoryToCheck = budget.expenses.get(selection -1 ).getCategory();
                 budget.expenses.remove(selection - 1);
                 System.out.println("Deleted expense: " + name);
-                budget.observers.getFirst().onBudgetEdited();
+                budget.observers.getFirst().maxBudgetCheck(budget, categoryToCheck);
+                categoryToCheck.observer.maxBudgetCheck(budget, categoryToCheck);
                 break;
             default:
                 System.out.println("Invalid option");

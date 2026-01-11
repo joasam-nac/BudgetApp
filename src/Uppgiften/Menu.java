@@ -40,7 +40,7 @@ public class Menu {
                     int i = 0;
                     for(Category c: cf.getAllCategories()){
                         i++;
-                        System.out.println(i + ". " + c.name());
+                        System.out.println(i + ". " + c.getName());
                     }
                     System.out.println(++i + ". New Category");
 
@@ -53,7 +53,7 @@ public class Menu {
                         System.out.println("New category name: ");
 
                         String categoryName = sc.nextLine();
-                        cf.createCategory(new Category(categoryName));
+                        cf.createCategory(categoryName);
                     }
                     budget.addExpense(new Expense(expenseName, expenseAmount, cf.getCategoryFromOrder(categoryChoice)));
                     break;
@@ -79,38 +79,5 @@ public class Menu {
             return true;
 
     }
-/*
-    public double awaitDouble(Scanner sc){
-
-        double input;
-
-        while(true){
-            try{
-            input = sc.nextDouble();
-            break;
-            }catch (InputMismatchException ex) {
-                IO.println("Invalid input, try again!");
-            }
-            sc.nextLine();
-        }
-        return input;
-    }
-
-    public int awaitInt(Scanner sc){
-
-        int input;
-
-        while(true){
-            try{
-                input = sc.nextInt();
-                break;
-            }catch (InputMismatchException ex) {
-                IO.println("Invalid input, try again!");
-            }
-            sc.nextLine();
-        }
-        return input;
-    }
-*/
 
 }
