@@ -6,13 +6,13 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
 
     public void editTransaction(Scanner scanner) {
 
-        if (budget.expenses.isEmpty()) {
+        if (budget.getExpenses().isEmpty()) {
             System.out.println("No expenses found");
             return;
         }
         System.out.println("Current expenses: ");
-        for (int i = 0; i < budget.expenses.size(); i++) {
-            Expense e = budget.expenses.get(i);
+        for (int i = 0; i < budget.getExpenses().size(); i++) {
+            Expense e = budget.getExpenses().get(i);
             System.out.println((i + 1) + ". " + e.getName() + ". " + e.getValue() + ". " + e.getCategory());
         }
 
@@ -21,7 +21,7 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
         int selection = scanner.nextInt();
         scanner.nextLine();
 
-        Expense expenseToEdit = budget.expenses.get(selection - 1);
+        Expense expenseToEdit = budget.getExpenses().get(selection - 1);
 
         System.out.println("Editing: " + expenseToEdit.getName());
         System.out.println("1. Change name");
@@ -60,8 +60,8 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
                 System.out.println(expenseToEdit.name + " successfully edited");
                 break;
             case 4:
-                String name = budget.expenses.get(selection - 1).getName();
-                budget.expenses.remove(selection - 1);
+                String name = budget.getExpenses().get(selection - 1).getName();
+                budget.getExpenses().remove(selection - 1);
                 System.out.println("Deleted expense: " + name);
                 break;
             default:

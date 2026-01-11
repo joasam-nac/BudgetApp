@@ -5,9 +5,12 @@ import java.util.Scanner;
 //MHA observer kunna sätta budget per kategori
 //varna när användare är nära budget-tak
 
+//Kolla in att lägga in decorator i menyval
+//Jobba vidare på observer för katogori
+
 public class Menu {
 
-    public static Budget budget = new Budget(1000.0);
+
 
     public void showMenu(){
 
@@ -17,7 +20,7 @@ public class Menu {
 
     }
     
-    public boolean executeChoice(Scanner sc, CategoryFactory cf){
+    public boolean executeChoice(Scanner sc, CategoryFactory cf, Budget budget){
 
             UserChoices uc = UserChoices.fromInput(sc.nextLine());
 
@@ -49,14 +52,27 @@ public class Menu {
 
                     sc.nextLine();
 
-                    if(categoryChoice == i){
-                        System.out.println("New category selected");
-                        System.out.println("New category name: ");
+                    Category selectedCategory;
 
+                    if (categoryChoice == i) {
+                        System.out.println("New category name:");
                         String categoryName = sc.nextLine();
-                        cf.createCategory(new Category(categoryName));
+
+                        selectedCategory = new Category(categoryName);
+                        cf.createCategory(selectedCategory);
+
+                        System.out.println("Choose budget for category:");
+                        double categoryBudget = sc.nextDouble();
+                        sc.nextLine();
+
+                        budget.addObserver(new CategoryObserver(selectedCategory, categoryBudget));
+                    } else {
+                        selectedCategory = cf.getCategoryFromOrder(categoryChoice);
                     }
-                    budget.addExpense(new Expense(expenseName, expenseAmount, cf.getCategoryFromOrder(categoryChoice)));
+
+                    budget.addExpense(
+                            new Expense(expenseName, expenseAmount, selectedCategory)
+                    );
                     break;
 
                 case EDIT_EXPENSE:
