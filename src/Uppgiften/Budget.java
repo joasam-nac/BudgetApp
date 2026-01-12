@@ -36,7 +36,7 @@ public class Budget {
         System.out.println("Your max budget is: " + maxBudget);
         double sum = 0.0;
         for(Expense e: this.expenses){
-            System.out.println(e.getName() + ", " + e.getCategory() + ": " + e.getValue());
+            System.out.println(e.getName() + ", " + e.getCategory().getName() + ": " + e.getValue());
             sum += e.getValue();
         }
         System.out.println("Spent: " + sum);

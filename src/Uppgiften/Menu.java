@@ -38,7 +38,7 @@ public class Menu {
                     int i = 0;
                     for(Category c: cr.getAllCategories()){
                         i++;
-                        System.out.println(i + ". " + c.name());
+                        System.out.println(i + ". " + c.getName());
                     }
                     System.out.println(++i + ". New Category");
 
@@ -62,7 +62,7 @@ public class Menu {
 
                         budget.addObserver(new CategoryObserver(cr.getCategory(categoryName), categoryBudget));
                     } else {
-                        selectedCategory = cr.getCategoryFromOrder(categoryChoice);
+                        selectedCategory = cr.getCategoryFromOrder(categoryChoice - 1);
                     }
 
                     budget.addExpense(

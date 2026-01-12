@@ -13,7 +13,7 @@ public record TransactionEditor(Budget budget, CategoryRepository categoryFactor
         System.out.println("Current expenses: ");
         for (int i = 0; i < budget.getExpenses().size(); i++) {
             Expense e = budget.getExpenses().get(i);
-            System.out.println((i + 1) + ". " + e.getName() + ". " + e.getValue() + ". " + e.getCategory());
+            System.out.println((i + 1) + ". " + e.getName() + ". " + e.getValue() + ". " + e.getCategory().getName());
         }
 
 
@@ -51,7 +51,7 @@ public record TransactionEditor(Budget budget, CategoryRepository categoryFactor
 
                 System.out.print("Choose category: ");
                 int categoryChoice = (Integer) CorrectInputControl.check(scanner,InputType.FOR_A_INT, true);
-                expenseToEdit.setCategory(categoryFactory.getCategoryFromOrder(categoryChoice));
+                expenseToEdit.setCategory(categoryFactory.getCategoryFromOrder(categoryChoice - 1));
                 System.out.println(expenseToEdit.getName() + " successfully edited");
                 break;
             case 4:
