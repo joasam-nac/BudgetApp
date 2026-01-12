@@ -63,4 +63,6 @@ public class Budget {
     public void removeObserver(BudgetObserver ob){
         observers.remove(ob);
     }
+
+
 }

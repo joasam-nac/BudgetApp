@@ -3,14 +3,10 @@ package Uppgiften;
 import java.util.Scanner;
 
 //MHA observer kunna sätta budget per kategori
-//varna när användare är nära budget-tak
 
 //Kolla in att lägga in decorator i menyval
-//Jobba vidare på observer för katogori
 
 public class Menu {
-
-
 
     public void showMenu(){
 
@@ -27,16 +23,16 @@ public class Menu {
             switch(uc){
                 case CHANGE_BUDGET:
                     System.out.print("Set new max budget:");
-                    double maxBudget = sc.nextDouble();
-                    sc.nextLine();
+                    double maxBudget = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
+
                     budget.setMaxBudget(maxBudget);
                     break;
                 case ADD_EXPENSE:
                     System.out.print("Write name of expense:");
                     String expenseName = sc.nextLine();
                     System.out.print("Write Expense amount: ");
-                    double expenseAmount = sc.nextDouble();
-                    sc.nextLine();
+                    double expenseAmount = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
+
                     System.out.println("List of categories:");
 
                     int i = 0;
@@ -48,9 +44,9 @@ public class Menu {
 
                     System.out.println("Choose an option (number): ");
 
-                    int categoryChoice = sc.nextInt();
+                    int categoryChoice = (Integer) CorrectInputControl.check(sc,InputType.FOR_A_INT,true);
 
-                    sc.nextLine();
+
 
                     Category selectedCategory;
 
@@ -62,8 +58,8 @@ public class Menu {
                         cf.createCategory(selectedCategory);
 
                         System.out.println("Choose budget for category:");
-                        double categoryBudget = sc.nextDouble();
-                        sc.nextLine();
+                        double categoryBudget = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
+
 
                         budget.addObserver(new CategoryObserver(selectedCategory, categoryBudget));
                     } else {

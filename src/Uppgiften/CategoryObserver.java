@@ -3,7 +3,7 @@ package Uppgiften;
 public class CategoryObserver implements BudgetObserver {
 
     private final Category category;
-    private final double maxCategoryBudget;
+    private double maxCategoryBudget;
     private double spent = 0.0;
 
     public CategoryObserver(Category category, double maxCategoryBudget) {
@@ -25,5 +25,9 @@ public class CategoryObserver implements BudgetObserver {
 
     public Category getCategory() {
         return category;
+    }
+
+    public void setMaxCategoryBudget(double maxCategoryBudget) {
+        this.maxCategoryBudget = maxCategoryBudget;
     }
 }

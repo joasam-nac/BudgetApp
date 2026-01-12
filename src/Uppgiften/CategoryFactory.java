@@ -4,7 +4,7 @@ import java.util.*;
 
 public final class CategoryFactory {
 
-    public final Set<String> defaultNames = Set.of("Food", "Clothes", "Hobbies", "Transportation", "Utilities", "Health", "LifeStyle");
+    public final List<String> defaultNames = List.of("Food", "Clothes", "Hobbies", "Transportation", "Utilities", "Health", "LifeStyle");
 
     public final List<Category> categories = new ArrayList<>();
 
@@ -12,6 +12,7 @@ public final class CategoryFactory {
         for (String s: defaultNames) {
             categories.add(new Category(s));
         }
+
     }
 
     public Category getCategory(String name) {
@@ -40,7 +41,7 @@ public final class CategoryFactory {
         int i = 0;
         for (Category c: categories) {
             i++;
-            if (order == i){
+            if (order == i-1){
                 return c;
             }
         }
