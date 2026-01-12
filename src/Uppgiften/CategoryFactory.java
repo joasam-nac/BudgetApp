@@ -28,13 +28,14 @@ public final class CategoryFactory {
         return categories;
     }
 
-    public void createCategory(Category category) {
+    public Category createCategory(String name) {
         for (Category c: categories) {
-            if (Objects.equals(c, category)){
-                return;
+            if (c.name().equals(name)){
+                return c;
             }
         }
-        categories.add(category);
+        categories.add(new Category(name));
+        return getCategory(name);
     }
 
     public Category getCategoryFromOrder(int order) {

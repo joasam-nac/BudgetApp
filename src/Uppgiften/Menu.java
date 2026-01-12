@@ -54,14 +54,13 @@ public class Menu {
                         System.out.println("New category name:");
                         String categoryName = sc.nextLine();
 
-                        selectedCategory = new Category(categoryName);
-                        cf.createCategory(selectedCategory);
+                        selectedCategory = cf.createCategory(categoryName);
 
                         System.out.println("Choose budget for category:");
                         double categoryBudget = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
 
 
-                        budget.addObserver(new CategoryObserver(selectedCategory, categoryBudget));
+                        budget.addObserver(new CategoryObserver(cf.getCategory(categoryName), categoryBudget));
                     } else {
                         selectedCategory = cf.getCategoryFromOrder(categoryChoice);
                     }
