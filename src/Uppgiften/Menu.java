@@ -16,7 +16,7 @@ public class Menu {
 
     }
     
-    public boolean executeChoice(Scanner sc, CategoryFactory cf, Budget budget){
+    public boolean executeChoice(Scanner sc, CategoryRepository cr, Budget budget, Factory factory){
 
             UserChoices uc = UserChoices.fromInput(sc.nextLine());
 
@@ -36,7 +36,7 @@ public class Menu {
                     System.out.println("List of categories:");
 
                     int i = 0;
-                    for(Category c: cf.getAllCategories()){
+                    for(Category c: cr.getAllCategories()){
                         i++;
                         System.out.println(i + ". " + c.name());
                     }
@@ -54,25 +54,25 @@ public class Menu {
                         System.out.println("New category name:");
                         String categoryName = sc.nextLine();
 
-                        selectedCategory = cf.createCategory(categoryName);
+                        selectedCategory = cr.addCategory(factory.createCategory(categoryName));
 
                         System.out.println("Choose budget for category:");
                         double categoryBudget = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
 
 
-                        budget.addObserver(new CategoryObserver(cf.getCategory(categoryName), categoryBudget));
+                        budget.addObserver(new CategoryObserver(cr.getCategory(categoryName), categoryBudget));
                     } else {
-                        selectedCategory = cf.getCategoryFromOrder(categoryChoice);
+                        selectedCategory = cr.getCategoryFromOrder(categoryChoice);
                     }
 
                     budget.addExpense(
-                            new Expense(expenseName, expenseAmount, selectedCategory)
+                            factory.createExpense(expenseName, expenseAmount, selectedCategory)
                     );
                     break;
 
                 case EDIT_EXPENSE:
                     System.out.println("Edit expense");
-                    TransactionEditor te = new TransactionEditor(budget, cf);
+                    TransactionEditor te = new TransactionEditor(budget, cr, factory);
                     te.editTransaction(sc);
                     break;
 

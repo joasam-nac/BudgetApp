@@ -2,7 +2,7 @@ package Uppgiften;
 
 import java.util.Scanner;
 
-public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) {
+public record TransactionEditor(Budget budget, CategoryRepository categoryFactory, Factory factory) {
 
     public void editTransaction(Scanner scanner) {
 
@@ -33,13 +33,13 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
         switch (option) {
             case 1:
                 System.out.println("Enter new name: ");
-                expenseToEdit.name = scanner.nextLine();
+                expenseToEdit.setName(scanner.nextLine());
                 System.out.println("Name change Successful");
                 break;
             case 2:
                 System.out.println("Enter new value: ");
-                expenseToEdit.value = (double) (Double) CorrectInputControl.check(scanner, InputType.FOR_A_DOUBLE, true);
-                System.out.println("Amount updated: " + expenseToEdit.name);
+                expenseToEdit.setValue((Double) CorrectInputControl.check(scanner, InputType.FOR_A_DOUBLE, true));
+                System.out.println("Amount updated: " + expenseToEdit.getName());
                 break;
             case 3:
                 System.out.println("Enter new category: ");
@@ -51,8 +51,8 @@ public record TransactionEditor(Budget budget, CategoryFactory categoryFactory) 
 
                 System.out.print("Choose category: ");
                 int categoryChoice = (Integer) CorrectInputControl.check(scanner,InputType.FOR_A_INT, true);
-                expenseToEdit.category = categoryFactory.getCategoryFromOrder(categoryChoice);
-                System.out.println(expenseToEdit.name + " successfully edited");
+                expenseToEdit.setCategory(categoryFactory.getCategoryFromOrder(categoryChoice));
+                System.out.println(expenseToEdit.getName() + " successfully edited");
                 break;
             case 4:
                 String name = budget.getExpenses().get(selection - 1).getName();

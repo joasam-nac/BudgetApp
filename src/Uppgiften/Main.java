@@ -10,16 +10,24 @@ void main() {
          */
     Scanner sc = new Scanner(System.in);
     Menu menu = new Menu();
-    CategoryFactory cf = new CategoryFactory();
+
     Budget budget = new Budget(1000.0);
     budget.addObserver(new TotalBudgetObserver(budget));
-    for (Category c: cf.categories) {
+
+    Factory factory = new Factory();
+    CategoryRepository cr = new CategoryRepository();
+
+    for(String s : cr.defaultNames){
+        cr.categories.add(factory.createCategory(s));
+    }
+
+    for (Category c: cr.categories) {
         budget.addObserver(new CategoryObserver(c, 500.0));
     }
 
     boolean running = true;
     while(running){
         menu.showMenu();
-        running = menu.executeChoice(sc, cf, budget);
+        running = menu.executeChoice(sc, cr, budget, factory);
     }
 }
