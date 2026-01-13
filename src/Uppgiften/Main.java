@@ -1,13 +1,6 @@
 import Uppgiften.*;
 
 void main() {
-        /*
-        Vad programmet ska göra:
-        -lägg till expense
-        -deklarera budget
-        -översikt/hålla koll på budget
-        -ha färdiga kategorier vid start
-         */
     Scanner sc = new Scanner(System.in);
     Menu menu = new Menu();
 
@@ -22,7 +15,7 @@ void main() {
     }
 
     for (Category c: cr.categories) {
-        budget.addObserver(new CategoryObserver(c, 500.0));
+        budget.addObserver(new CategoryObserver(c));
     }
 
     boolean running = true;

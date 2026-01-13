@@ -12,7 +12,7 @@ public final class CategoryRepository {
 
     public Category getCategory(String name) {
         for (Category c: categories) {
-            if (Objects.equals(c.name(), name)){
+            if (Objects.equals(c.getName(), name)){
                 return c;
             }
         }

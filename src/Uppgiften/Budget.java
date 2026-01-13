@@ -10,13 +10,11 @@ public class Budget {
 
     public Budget(double maxBudget) {
         this.maxBudget = maxBudget;
-        //observers.add(new ObserverTest(maxBudget, 0.75));
     }
 
     public void addExpense(Expense e){
         this.expenses.add(e);
         notifyObservers(e);
-        //observers.getFirst().onExpenseAdded(e);
     }
 
     public double getMaxBudget() {

@@ -3,14 +3,13 @@ package Uppgiften;
 public class CategoryObserver implements BudgetObserver {
 
     private final Category category;
-    private double maxCategoryBudget;
     private double spent = 0.0;
 
-    public CategoryObserver(Category category, double maxCategoryBudget) {
+    public CategoryObserver(Category category) {
         this.category = category;
-        this.maxCategoryBudget = maxCategoryBudget;
     }
 
+    @Override
     public void onExpenseAdded(Expense e) {
         if (!e.getCategory().equals(category)) {
             return;
@@ -18,16 +17,12 @@ public class CategoryObserver implements BudgetObserver {
 
         spent += e.getValue();
         double DEFAULT_RATIO = 0.75;
-        if (spent > maxCategoryBudget * DEFAULT_RATIO) {
-            System.out.println("HOLY SHIT YOU ARE CLOSE TO THE CAP OF " + category.name());
+        if (spent > category.getBudget() * DEFAULT_RATIO) {
+            System.out.println("You are reaching the maximum budget for " + category.getName());
         }
     }
 
     public Category getCategory() {
         return category;
-    }
-
-    public void setMaxCategoryBudget(double maxCategoryBudget) {
-        this.maxCategoryBudget = maxCategoryBudget;
     }
 }

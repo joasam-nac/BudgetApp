@@ -46,7 +46,7 @@ public record TransactionEditor(Budget budget, CategoryRepository categoryFactor
                 int i = 0;
                 for (Category c : categoryFactory.getAllCategories()) {
                     i++;
-                    System.out.println(i + ". " + c.name());
+                    System.out.println(i + ". " + c.getName());
                 }
 
                 System.out.print("Choose category: ");
