@@ -4,8 +4,9 @@ public enum UserChoices {
     CHANGE_BUDGET("1", "Change budget"),
     ADD_EXPENSE("2", "Add expense"),
     EDIT_EXPENSE("3", "Edit expense"),
-    CHECK_OVERVIEW("4", "Check overview"),
-    EXIT("5", "Exit");
+    UNDO_EXPENSE("4","Undo expense"),
+    CHECK_OVERVIEW("5", "Check overview"),
+    EXIT("6", "Exit");
 
     private final String key;
     private final String description;

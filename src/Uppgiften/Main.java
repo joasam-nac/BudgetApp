@@ -1,11 +1,13 @@
 import Uppgiften.*;
 
 void main() {
+
     Scanner sc = new Scanner(System.in);
-    Menu menu = new Menu();
 
     Budget budget = new Budget(1000.0);
     budget.addObserver(new TotalBudgetObserver(budget));
+
+    Menu menu = new Menu(budget);
 
     Factory factory = new Factory();
     CategoryRepository cr = new CategoryRepository();
@@ -23,4 +25,6 @@ void main() {
         menu.showMenu();
         running = menu.executeChoice(sc, cr, budget, factory);
     }
+
+
 }

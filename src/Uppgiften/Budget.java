@@ -1,11 +1,13 @@
 package Uppgiften;
 
+import Uppgiften.Memento.BudgetMemento;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Budget {
     private double maxBudget;
-    private final List<Expense> expenses = new ArrayList<>();
+    private List<Expense> expenses = new ArrayList<>();
     private final List<BudgetObserver> observers = new ArrayList<>();
 
     public Budget(double maxBudget) {
@@ -58,8 +60,11 @@ public class Budget {
 
     }
 
-    public void removeObserver(BudgetObserver ob){
-        observers.remove(ob);
+    public BudgetMemento save(){
+        return new BudgetMemento(new ArrayList<>(expenses));
+    }
+    public void restore(BudgetMemento memento){
+        expenses = new ArrayList<>(memento.getSnapshot());
     }
 
 
