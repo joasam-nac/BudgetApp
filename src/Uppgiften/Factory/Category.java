@@ -18,6 +18,11 @@ public class Category implements BudgetObject {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public void objectID() {
+        IO.println("This is a Category");
+    }
 }
 
 

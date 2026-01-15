@@ -1,3 +1,5 @@
 package Uppgiften.Factory;
 
-public interface BudgetObject {}
+public interface BudgetObject {
+    void objectID();
+}

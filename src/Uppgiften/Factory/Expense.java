@@ -39,4 +39,9 @@ public class Expense implements Transaction, BudgetObject {
         this.value = value;
         this.category = category;
     }
+
+    @Override
+    public void objectID() {
+        IO.println("This is an Expense");
+    }
 }
