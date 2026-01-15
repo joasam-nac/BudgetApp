@@ -1,6 +1,8 @@
-package Uppgiften;
+package Uppgiften.Factory;
 
-public class Expense implements Transaction {
+import Uppgiften.Transaction;
+
+public class Expense implements Transaction, BudgetObject {
     private String name;
     private double value;
     private Category category;
@@ -31,5 +33,10 @@ public class Expense implements Transaction {
     }
     public Category getCategory() {
         return category;
+    }
+    public void fill(String name, double value,  Category category){
+        this.name = name;
+        this.value = value;
+        this.category = category;
     }
 }

@@ -1,5 +1,9 @@
 package Uppgiften;
 
+import Uppgiften.Factory.Category;
+import Uppgiften.Factory.Expense;
+import Uppgiften.Factory.Factory;
+
 import java.util.Scanner;
 
 public record TransactionEditor(Budget budget, CategoryRepository categoryFactory, Factory factory) {

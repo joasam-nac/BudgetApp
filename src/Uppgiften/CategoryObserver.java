@@ -1,5 +1,8 @@
 package Uppgiften;
 
+import Uppgiften.Factory.Category;
+import Uppgiften.Factory.Expense;
+
 public class CategoryObserver implements BudgetObserver {
 
     private final Category category;

@@ -1,7 +1,7 @@
-package Uppgiften;
+package Uppgiften.Factory;
 
-public class Category {
-    private final String name;
+public class Category implements BudgetObject {
+    private String name;
     private double budget;
 
     Category(String name, double budget){
@@ -14,6 +14,10 @@ public class Category {
     }
     public double getBudget() { return budget;}
     public void setBudget(double newMax){ this.budget = newMax;}
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 
 

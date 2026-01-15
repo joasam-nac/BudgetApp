@@ -1,6 +1,8 @@
 package Uppgiften;
 
-import Uppgiften.Memento.BudgetMemento;
+import Uppgiften.Factory.Category;
+import Uppgiften.Factory.Expense;
+import Uppgiften.Factory.Factory;
 import Uppgiften.Memento.Caretaker;
 
 import java.util.NoSuchElementException;
@@ -88,21 +90,18 @@ public class Menu {
                     if (categoryChoice == i) {
                         System.out.println("New category name:");
                         String categoryName = sc.nextLine();
-
-                        selectedCategory = cr.addCategory(factory.createCategory(categoryName));
-
-                        System.out.println("Choose budget for category:");
-                        double categoryBudget = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
-
+                        Category c = (Category) factory.createObject("category");
+                        c.setName(categoryName);
+                        selectedCategory = cr.addCategory(c);
 
                         budget.addObserver(new CategoryObserver(cr.getCategory(categoryName)));
                     } else {
                         selectedCategory = cr.getCategoryFromOrder(categoryChoice - 1);
                     }
+                    Expense e = (Expense) factory.createObject("expense");
+                    e.fill(expenseName, expenseAmount, selectedCategory);
+                    budget.addExpense(e);
 
-                    budget.addExpense(
-                            factory.createExpense(expenseName, expenseAmount, selectedCategory)
-                    );
                     caretaker.saveSnapshot(budget.save());
                     break;
 
@@ -115,8 +114,8 @@ public class Menu {
                 case UNDO_EXPENSE:
                     try {
                         IO.println("\nThe following expense has been undone: " + budget.getExpenses().getLast().getName());
-                        budget.restore((BudgetMemento) caretaker.getMemento());
-                    }catch(NoSuchElementException e){
+                        budget.restore(caretaker.getMemento());
+                    }catch(NoSuchElementException SEE){
                         IO.println("\nThere is no expense to be undone.");
                     }
                     break;

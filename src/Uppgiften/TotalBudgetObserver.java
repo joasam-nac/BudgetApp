@@ -1,5 +1,7 @@
 package Uppgiften;
 
+import Uppgiften.Factory.Expense;
+
 public class TotalBudgetObserver implements BudgetObserver {
 
     private final Budget budget;

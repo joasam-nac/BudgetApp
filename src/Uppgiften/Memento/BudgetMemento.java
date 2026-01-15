@@ -1,7 +1,8 @@
 package Uppgiften.Memento;
 
 
-import Uppgiften.Expense;
+
+import Uppgiften.Factory.Expense;
 
 import java.util.ArrayList;
 import java.util.List;

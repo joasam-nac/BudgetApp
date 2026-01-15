@@ -1,4 +1,6 @@
 import Uppgiften.*;
+import Uppgiften.Factory.Category;
+import Uppgiften.Factory.Factory;
 
 void main() {
 
@@ -13,7 +15,9 @@ void main() {
     CategoryRepository cr = new CategoryRepository();
 
     for(String s : cr.defaultNames){
-        cr.categories.add(factory.createCategory(s));
+        Category c = (Category) factory.createObject("category");
+        c.setName(s);
+        cr.categories.add(c);
     }
 
     for (Category c: cr.categories) {

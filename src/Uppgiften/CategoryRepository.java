@@ -1,5 +1,7 @@
 package Uppgiften;
 
+import Uppgiften.Factory.Category;
+
 import java.util.*;
 
 public final class CategoryRepository {

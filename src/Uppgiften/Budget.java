@@ -1,6 +1,8 @@
 package Uppgiften;
 
+import Uppgiften.Factory.Expense;
 import Uppgiften.Memento.BudgetMemento;
+import Uppgiften.Memento.Memento;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,8 +65,9 @@ public class Budget {
     public BudgetMemento save(){
         return new BudgetMemento(new ArrayList<>(expenses));
     }
-    public void restore(BudgetMemento memento){
-        expenses = new ArrayList<>(memento.getSnapshot());
+    public void restore(Memento memento){
+        BudgetMemento o = (BudgetMemento) memento;
+        expenses = new ArrayList<>(o.getSnapshot());
     }
 
 
