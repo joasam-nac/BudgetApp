@@ -14,12 +14,12 @@ public class TotalBudgetObserver implements BudgetObserver {
 
         double ratio = 0.85 * budget.getMaxBudget();
         spent += e.getValue();
-        if (spent >= ratio && spent < budget.getMaxBudget()){
-            IO.println("You are reaching your maximum budget");
+        if (spent > budget.getMaxBudget()) {
+            IO.println("You have exceeded your total maximum budget");
         } else if (spent == budget.getMaxBudget()) {
             IO.println("Good job, now dont spend another penny!");
-        } else if (spent > budget.getMaxBudget()) {
-            IO.println("You have exceeded your maximum budget");
+        } else if (spent >= ratio) {
+            IO.println("You have almost reached your maximum budget");
         }
     }
 }

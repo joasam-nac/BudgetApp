@@ -93,7 +93,7 @@ public class Menu {
 
                         System.out.println("Choose budget for category:");
                         double categoryBudget = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
-
+                        selectedCategory.setBudget(categoryBudget);
 
                         budget.addObserver(new CategoryObserver(cr.getCategory(categoryName)));
                     } else {
@@ -110,7 +110,6 @@ public class Menu {
                     System.out.println("Edit expense");
                     TransactionEditor te = new TransactionEditor(budget, cr, factory);
                     te.editTransaction(sc);
-                    caretaker.saveSnapshot(budget.save());
                     break;
                 case UNDO_EXPENSE:
                     try {

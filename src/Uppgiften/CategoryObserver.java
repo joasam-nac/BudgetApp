@@ -17,9 +17,13 @@ public class CategoryObserver implements BudgetObserver {
 
         spent += e.getValue();
         double DEFAULT_RATIO = 0.75;
-        if (spent > category.getBudget() * DEFAULT_RATIO) {
-            System.out.println("You are reaching the maximum budget for " + category.getName());
-        }
+        if (spent > category.getBudget() * DEFAULT_RATIO && spent < category.getBudget()) {
+            System.out.println("You have almost reached your maximum budget " + category.getName());
+        } else if (spent == category.getBudget()) {
+            IO.println("Good job, now dont spend another penny on the " +  category.getName() + " category!");
+        } else if (spent > category.getBudget()) {
+            IO.println("You have exceeded your maximum budget for the "  + category.getName() + " category!");
+    }
     }
 
     public Category getCategory() {
