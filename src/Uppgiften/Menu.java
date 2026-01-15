@@ -1,8 +1,18 @@
 package Uppgiften;
 
+import Uppgiften.Memento.BudgetMemento;
+import Uppgiften.Memento.Caretaker;
+
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Menu {
+
+    private final Caretaker caretaker = new Caretaker();
+
+    public Menu(Budget b){
+        caretaker.saveSnapshot(b.save());
+    }
 
     public void showMenu(){
 
@@ -13,6 +23,7 @@ public class Menu {
     }
     
     public boolean executeChoice(Scanner sc, CategoryRepository cr, Budget budget, Factory factory){
+
 
             UserChoices uc = UserChoices.fromInput(sc.nextLine());
 
@@ -92,18 +103,26 @@ public class Menu {
                     budget.addExpense(
                             factory.createExpense(expenseName, expenseAmount, selectedCategory)
                     );
+                    caretaker.saveSnapshot(budget.save());
                     break;
 
                 case EDIT_EXPENSE:
                     System.out.println("Edit expense");
                     TransactionEditor te = new TransactionEditor(budget, cr, factory);
                     te.editTransaction(sc);
+                    caretaker.saveSnapshot(budget.save());
                     break;
-
+                case UNDO_EXPENSE:
+                    try {
+                        IO.println("\nThe following expense has been undone: " + budget.getExpenses().getLast().getName());
+                        budget.restore((BudgetMemento) caretaker.getMemento());
+                    }catch(NoSuchElementException e){
+                        IO.println("\nThere is no expense to be undone.");
+                    }
+                    break;
                 case CHECK_OVERVIEW:
                     budget.print();
                     break;
-
                 case EXIT:
                     System.out.println("Exiting...");
                     return false;
@@ -115,6 +134,5 @@ public class Menu {
             return true;
 
     }
-
 
 }
