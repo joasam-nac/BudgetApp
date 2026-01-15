@@ -2,12 +2,7 @@ package Uppgiften;
 
 import java.util.Scanner;
 
-//MHA observer kunna sätta budget per kategori
-//varna när användare är nära budget-tak
-
 public class Menu {
-
-    public static Budget budget = new Budget(1000.0);
 
     public void showMenu(){
 
@@ -17,51 +12,91 @@ public class Menu {
 
     }
     
-    public boolean executeChoice(Scanner sc, CategoryFactory cf){
+    public boolean executeChoice(Scanner sc, CategoryRepository cr, Budget budget, Factory factory){
 
             UserChoices uc = UserChoices.fromInput(sc.nextLine());
 
             switch(uc){
                 case CHANGE_BUDGET:
-                    System.out.print("Set new max budget:");
-                    double maxBudget = sc.nextDouble();
-                    sc.nextLine();
-                    budget.setMaxBudget(maxBudget);
+                    System.out.println("Set new budget:");
+                    System.out.println("1. Total budget");
+                    System.out.println("2. Category budget");
+                    System.out.println("Choose an option (number): ");
+
+                    int choice = (Integer) CorrectInputControl.check(sc, InputType.FOR_A_INT, true);
+
+                    if(choice == 1){
+                        System.out.print("Set new total budget: ");
+                        double maxBudget = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
+                        budget.setMaxBudget(maxBudget);
+                        break;
+                    } else if(choice == 2){
+                        System.out.println("Categories:");
+
+                        int idx = 0;
+                        for (Category c : cr.getAllCategories()) {
+                            idx++;
+                            System.out.println(idx + ". " + c.getName() + " (" + c.getBudget() + ")");
+                        }
+                        System.out.print("Select category (number): ");
+                        int categoryChoice = (Integer) CorrectInputControl.check(sc, InputType.FOR_A_INT, true);
+                        Category selected = cr.getCategoryFromOrder(categoryChoice - 1);
+                        if (selected == null){
+                            System.out.println("Invalid category!");
+                            break;
+                        }
+                        System.out.print("Set new budget for " + selected.getName() + ": ");
+                        double newBudget = (Double) CorrectInputControl.check(sc, InputType.FOR_A_DOUBLE, true);
+                        selected.setBudget(newBudget);
+                        break;
+                    }
+                    System.out.println("Invalid option!");
                     break;
+
                 case ADD_EXPENSE:
                     System.out.print("Write name of expense:");
                     String expenseName = sc.nextLine();
                     System.out.print("Write Expense amount: ");
-                    double expenseAmount = sc.nextDouble();
-                    sc.nextLine();
+                    double expenseAmount = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
+
                     System.out.println("List of categories:");
 
                     int i = 0;
-                    for(Category c: cf.getAllCategories()){
+                    for(Category c: cr.getAllCategories()){
                         i++;
-                        System.out.println(i + ". " + c.name());
+                        System.out.println(i + ". " + c.getName());
                     }
                     System.out.println(++i + ". New Category");
 
                     System.out.println("Choose an option (number): ");
 
-                    int categoryChoice = sc.nextInt();
+                    int categoryChoice = (Integer) CorrectInputControl.check(sc,InputType.FOR_A_INT,true);
 
-                    sc.nextLine();
+                    Category selectedCategory;
 
-                    if(categoryChoice == i){
-                        System.out.println("New category selected");
-                        System.out.println("New category name: ");
-
+                    if (categoryChoice == i) {
+                        System.out.println("New category name:");
                         String categoryName = sc.nextLine();
-                        cf.createCategory(new Category(categoryName));
+
+                        selectedCategory = cr.addCategory(factory.createCategory(categoryName));
+
+                        System.out.println("Choose budget for category:");
+                        double categoryBudget = (Double) CorrectInputControl.check(sc,InputType.FOR_A_DOUBLE, true);
+
+
+                        budget.addObserver(new CategoryObserver(cr.getCategory(categoryName)));
+                    } else {
+                        selectedCategory = cr.getCategoryFromOrder(categoryChoice - 1);
                     }
-                    budget.addExpense(new Expense(expenseName, expenseAmount, cf.getCategoryFromOrder(categoryChoice)));
+
+                    budget.addExpense(
+                            factory.createExpense(expenseName, expenseAmount, selectedCategory)
+                    );
                     break;
 
                 case EDIT_EXPENSE:
                     System.out.println("Edit expense");
-                    TransactionEditor te = new TransactionEditor(budget, cf);
+                    TransactionEditor te = new TransactionEditor(budget, cr, factory);
                     te.editTransaction(sc);
                     break;
 
